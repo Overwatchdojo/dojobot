@@ -1,0 +1,10 @@
+{
+  "ownerID": "my_discord_id",
+  "token": "my_discord_bot_token",
+  "prefix": "!",
+  "dbConfig": {
+    "dialect": "sqlite",
+    "storage": "dojobot.db",
+    "operatorsAliases": false
+  }
+}
