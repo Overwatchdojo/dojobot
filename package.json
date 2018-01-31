@@ -1,0 +1,24 @@
+{
+  "name": "dojobot",
+  "version": "1.0.0",
+  "description": "This is the public repository for the Overwatchdojo bot that is being made for http://overwatchdojo.com/discord/.",
+  "main": "dojobot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Overwatchdojo/dojobot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Overwatchdojo/dojobot/issues"
+  },
+  "homepage": "https://github.com/Overwatchdojo/dojobot#readme",
+  "dependencies": {
+    "discord-akairo": "^7.5.4",
+    "discord.js": "^11.3.0",
+    "sequelize": "^4.32.2"
+  }
+}
