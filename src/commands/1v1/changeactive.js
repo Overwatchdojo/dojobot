@@ -4,7 +4,7 @@ const { Competitor } = require('../../models/1v1');
 
 const CommandUtil = require('../../util/CommandUtil');
 
-class RegisterCommand extends Command {
+class ChangeActiveCommand extends Command {
   constructor() {
     super('1v1changeactive', {
       aliases: ['1v1changeactive'],
@@ -36,4 +36,4 @@ class RegisterCommand extends Command {
   }
 }
 
-module.exports = RegisterCommand;
+module.exports = ChangeActiveCommand;
