@@ -2,6 +2,8 @@ const { Command } = require('discord-akairo');
 
 const { Competitor } = require('../../models/1v1');
 
+const CommandUtil = require('../../util/CommandUtil');
+
 class RegisterCommand extends Command {
   constructor() {
     super('1v1register', {
@@ -28,7 +30,8 @@ class RegisterCommand extends Command {
       return message.author.send('Successfully registered as League Participant.');
     } else {
       // In all other cases, request confirmation
-      return message.author.send('Do you want to register as new League Participant? If so, please reply with !1v1register.');
+      return message.author.send('Do you want to register as new League Participant? If so, please reply with **'
+        + CommandUtil.commandName(this) + '**.');
     }
   }
 }
