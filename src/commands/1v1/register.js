@@ -4,10 +4,12 @@ const { Competitor } = require('../../models/1v1');
 
 const CommandUtil = require('../../util/CommandUtil');
 
+const name = '1v1register';
+
 class RegisterCommand extends Command {
   constructor() {
-    super('1v1register', {
-      aliases: ['1v1register'],
+    super(name, {
+      aliases: [ name ],
       category: '1v1'
     });
   }
@@ -35,5 +37,7 @@ class RegisterCommand extends Command {
     }
   }
 }
+
+RegisterCommand.commandName = name;
 
 module.exports = RegisterCommand;

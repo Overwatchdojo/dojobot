@@ -1,6 +1,10 @@
 class CommandUtil {
   static commandName(command) {
-    return command.client.options.prefix + command.aliases[0];
+    return prefix(command) + command.aliases[0];
+  }
+
+  static prefix(command) {
+    return command.client.options.prefix;
   }
 }
 

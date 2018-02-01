@@ -21,10 +21,10 @@ class Database {
       const filePath = path.join(modelsPath, file);
       if (filePath.startsWith('.') || !filePath.endsWith('.js'))
         continue;
-      const models = await require(filePath);
-      for (const k in models)
-        models[k].sync();
+      await require(filePath);
     }
+
+    return db.sync();
   }
 }
 
