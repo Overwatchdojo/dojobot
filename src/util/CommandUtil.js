@@ -1,6 +1,6 @@
 class CommandUtil {
   static commandName(command) {
-    return prefix(command) + command.aliases[0];
+    return this.prefix(command) + command.aliases[0];
   }
 
   static prefix(command) {
