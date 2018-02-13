@@ -16,7 +16,7 @@ class MatchesCommand extends Command {
     });
   }
 
-  async exec(message, { user }) {
+  async exec(message) {
     // Find up to five latest validated matches
     const matches = await Match.findAll({
       where: { matchState: MatchStates.VALIDATED },
