@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo');
 const { Competitor, Match, MatchStates } = require('../../models/1v1');
+const StatsUtil = require('../../util/1v1/StatsUtil');
 
 const CommandUtil = require('../../util/CommandUtil');
 
@@ -30,42 +31,14 @@ class StatsCommand extends Command {
       return message.channel.send('You tried to get statistics for a non-existing user, please try again!');
     }
 
-    // WHERE constraint that only matches validated games where competitor was participating
-    const matchParticipantWhere = {
-      [Op.or]: [
-        { challengerId: competitor.userId },
-        { challengedId: competitor.userId }
-      ],
-      matchState: MatchStates.VALIDATED
-    };
-
-    // Technically it's possible to count all three match stats in one SQL query but Sequelize doesn't offer any way of
-    // doing it without using raw query, fix later if performance is actually a problem
-    const numPlayed = await Match.count({ where: matchParticipantWhere });
-
-    const combine = (a, b) => Object.assign({}, a, b);
-
-    const numWon = await Match.count({
-      where: combine(matchParticipantWhere, {
-        winnerId: competitor.userId,
-      })
-    });
-
-    const numDrawn = await Match.count({
-      where: combine(matchParticipantWhere, {
-        winnerId: null,
-      })
-    });
-
-    const activityPoints = numPlayed;
-    const skillPoints = numWon * 100 + numDrawn * 33;
+    const stats = await StatsUtil.statsFor(competitor);
 
     return message.channel.send(
       'Here are the stats for ' + user.toString() + ':\n'
-      + 'Matches played: ' + numPlayed + '\n'
-      + 'Matches won: ' + numWon + '\n'
-      + 'SP: ' + skillPoints + '\n'
-      + 'AP: ' + activityPoints);
+      + 'Matches played: ' + stats.gamesPlayed + '\n'
+      + 'Matches won: ' + stats.gamesWon + '\n'
+      + 'SP: ' + stats.skillPoints + '\n'
+      + 'AP: ' + stats.activityPoints);
   }
 }
 
