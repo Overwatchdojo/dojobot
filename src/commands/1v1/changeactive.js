@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo');
 const { Competitor } = require('../../models/1v1');
-const HelpCommand = require('./help');
 
 const CommandUtil = require('../../util/CommandUtil');
 
@@ -20,7 +19,7 @@ class ChangeActiveCommand extends Command {
     if (!competitor) {
       // If the competitor is not registered, abort
       return message.author.send('You are not a registered League Participant, please refer to **'
-        + CommandUtil.prefix(this) + HelpCommand.commandName + '**.');
+        + CommandUtil.prefix(this) + '1v1help**.');
     } else if (message.channel.type == 'dm') {
       // If the request was a DM, consider it confirmation and change active status
       competitor.active = !competitor.active;
@@ -35,6 +34,6 @@ class ChangeActiveCommand extends Command {
   }
 }
 
-ChangeActiveCommand.name = name;
+ChangeActiveCommand.commandName = name;
 
 module.exports = ChangeActiveCommand;

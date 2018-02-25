@@ -28,13 +28,13 @@ class StatsCommand extends Command {
 
     if (!competitor) {
       // Requested user is not registered as a competitor, abort
-      return message.channel.send('You tried to get statistics for a non-existing user, please try again!');
+      return message.channel.send('You tried to get statistics for a non-existing user, please try again! You need to use the full mention name without the @ tag!');
     }
 
     const stats = await StatsUtil.statsFor(competitor);
 
     return message.channel.send(
-      'Here are the stats for ' + user.toString() + ':\n'
+      'Here are the stats for **' + user.username + '**:\n'
       + 'Matches played: ' + stats.gamesPlayed + '\n'
       + 'Matches won: ' + stats.gamesWon + '\n'
       + 'SP: ' + stats.skillPoints + '\n'
