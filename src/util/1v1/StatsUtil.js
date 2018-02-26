@@ -1,7 +1,5 @@
 const { Competitor, Match, MatchStates } = require('../../models/1v1');
 
-const CommandUtil = require('../../util/CommandUtil');
-
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
