@@ -3,6 +3,8 @@ const { Competitor, Match, MatchStates } = require('../../models/1v1');
 
 const CommandUtil = require('../../util/CommandUtil');
 
+const UserUtil = require('../../util/1v1/UserUtil');
+
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -30,11 +32,14 @@ class MatchesCommand extends Command {
 
     var msg = 'Here are the latest matches:\n';
     for (const match of matches) {
+      const describeUser = user => UserUtil.describeUser(message.channel, user);
       const challenger = await this.client.users.get(match.challengerId);
       const challenged = await this.client.users.get(match.challengedId);
-      const result = match.winnerId ? 'winner=' + await this.client.users.get(match.winnerId).toString() : 'draw';
-      msg += '  -  Time: ' + match.createdAt + ' ID=' + match.matchId + ' challenger=' + challenger.toString()
-        + ' challenged=' + challenged.toString() + ' ' + result + '\n';
+      const result = match.winnerId
+        ?  'winner=**' + describeUser(await this.client.users.get(match.winnerId)) + '**'
+        : 'draw';
+      msg += '  -  Time: ' + match.createdAt + ' ID=' + match.matchId + ' challenger=**' + describeUser(challenger)
+        + '** challenged=**' + describeUser(challenged) + '** ' + result + '\n';
     }
 
     return message.channel.send(msg);

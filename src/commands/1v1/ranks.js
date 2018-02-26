@@ -1,6 +1,7 @@
 const { Command } = require('discord-akairo');
 const { Competitor, Match, MatchStates } = require('../../models/1v1');
 const StatsUtil = require('../../util/1v1/StatsUtil');
+const UserUtil = require('../../util/1v1/UserUtil');
 
 const CommandUtil = require('../../util/CommandUtil');
 
@@ -77,8 +78,8 @@ SELECT
 
     const rankString = async ranker => {
       const user = await this.client.users.get(ranker.competitor.userId);
-      return '  ' + ranker.finalRank + ') ' + user.toString()
-        + ' (SP: ' + ranker.skillPoints + ', AP: ' + ranker.activityPoints + ')\n';
+      return '  ' + ranker.finalRank + ') **' + UserUtil.describeUser(message.channel, user)
+        + '** (SP: ' + ranker.skillPoints + ', AP: ' + ranker.activityPoints + ')\n';
     };
 
     // Grab players at ranks 1 to <SHOW_RANKS> (including tied)
