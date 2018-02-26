@@ -6,6 +6,8 @@ const HelpCommand = require('./help');
 
 const CommandUtil = require('../../util/CommandUtil');
 
+const UserUtil = require('../../util/1v1/UserUtil');
+
 const name = '1v1matchregister';
 
 class MatchRegisterCommand extends Command {
@@ -80,13 +82,14 @@ class MatchRegisterCommand extends Command {
 
     const withPrefix = (msg) => CommandUtil.prefix(this) + msg;
 
-    await challengedUser.send(message.author.toString() + ' registered a match against you with ID = **'
-      + match.matchId + '** resulting in *' + challengedResult + '*.\n'
+    await challengedUser.send('**' + UserUtil.describeUser(message.channel, message.author)
+      + ' registered a match against you with ID = **' + match.matchId + '** resulting in *' + challengedResult
+      + '*.\n'
       + 'To confirm the result, please reply with **' + withPrefix(MatchConfirmCommand.commandName) + '**\n'
       + 'To dispute the result, please reply with **' + withPrefix(MatchDisputeCommand.commandName) + '**');
 
-    return message.author.send('Match versus ' + challengedUser.toString() + ' registered with ID = '
-      + match.matchId + '.');
+    return message.author.send('Match versus **' + UserUtil.describeUser(message.channel, challengedUser)
+      + '** registered with ID = ' + match.matchId + '.');
   }
 }
 

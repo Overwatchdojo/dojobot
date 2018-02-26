@@ -1,6 +1,7 @@
 const { Command } = require('discord-akairo');
 const { Competitor, Match, MatchStates } = require('../../models/1v1');
 const StatsUtil = require('../../util/1v1/StatsUtil');
+const UserUtil = require('../../util/1v1/UserUtil');
 
 const CommandUtil = require('../../util/CommandUtil');
 
@@ -34,7 +35,7 @@ class StatsCommand extends Command {
     const stats = await StatsUtil.statsFor(competitor);
 
     return message.channel.send(
-      'Here are the stats for **' + user.username + '**:\n'
+      'Here are the stats for **' + UserUtil.describeUser(message.channel, user) + '**:\n'
       + 'Matches played: ' + stats.gamesPlayed + '\n'
       + 'Matches won: ' + stats.gamesWon + '\n'
       + 'SP: ' + stats.skillPoints + '\n'
